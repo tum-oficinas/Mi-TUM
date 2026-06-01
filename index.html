@@ -431,6 +431,93 @@ body{
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* ════ QR MODAL ════ */
+.qr-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  z-index:10000;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.28s cubic-bezier(.16,1,.3,1);
+}
+.qr-overlay.visible{opacity:1;pointer-events:all}
+.qr-box{
+  background:#0D0F0D;
+  border:1px solid rgba(0,255,135,0.22);
+  border-radius:20px;
+  padding:28px 24px 22px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  box-shadow:0 24px 80px rgba(0,0,0,0.80), 0 0 0 1px rgba(0,255,135,0.06);
+  max-width:320px;width:92%;
+  transform:scale(0.92) translateY(12px);
+  transition:transform 0.28s cubic-bezier(.16,1,.3,1);
+  position:relative;
+}
+.qr-overlay.visible .qr-box{transform:scale(1) translateY(0)}
+.qr-close{
+  position:absolute;top:12px;right:12px;
+  width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  cursor:pointer;
+  color:rgba(238,240,236,0.40);
+  font-size:16px;line-height:1;
+  transition:background 0.2s,color 0.2s;
+}
+.qr-close:hover{background:rgba(0,255,135,0.10);color:var(--txt)}
+.qr-label{
+  font-family:'Inter',sans-serif;font-size:8px;letter-spacing:0.44em;
+  color:rgba(0,255,135,0.50);text-transform:uppercase;font-weight:500;
+}
+.qr-title{
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;
+  color:var(--txt);letter-spacing:0.01em;text-align:center;
+  margin-top:-4px;
+}
+.qr-img-wrap{
+  width:240px;height:240px;
+  border-radius:12px;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  padding:14px;
+  box-shadow:0 0 0 1px rgba(0,255,135,0.14), 0 0 28px rgba(0,255,135,0.08);
+}
+.qr-img-wrap img{
+  width:100%;height:100%;
+  object-fit:contain;
+  display:block;
+  image-rendering:crisp-edges;
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:pixelated;
+}
+.qr-hint{
+  font-size:11px;color:rgba(238,240,236,0.30);font-family:'Inter',sans-serif;
+  text-align:center;line-height:1.5;
+}
+.qr-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-top:2px;
+}
+.qr-btn{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:10px 8px;
+  background:var(--row-bg);
+  border:1px solid var(--row-rim);
+  border-radius:9px;
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:500;
+  color:var(--txt2);text-decoration:none;cursor:pointer;
+  transition:background 0.22s,border-color 0.22s,color 0.22s;
+  -webkit-tap-highlight-color:transparent;
+}
+.qr-btn:hover{
+  background:rgba(0,255,135,0.07);
+  border-color:rgba(0,255,135,0.22);
+  color:var(--txt);
+}
+
 /* ════ CTA ════ */
 .cta-section{padding:20px 20px 0}
 
@@ -742,6 +829,47 @@ body{
         </div>
       </div>
 
+      <div class="c-row" onclick="openQR()">
+        <div class="c-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="7" height="7" rx="1" stroke="#00FF87" stroke-width="1.5"/>
+            <rect x="14" y="3" width="7" height="7" rx="1" stroke="#00FF87" stroke-width="1.5"/>
+            <rect x="3" y="14" width="7" height="7" rx="1" stroke="#00FF87" stroke-width="1.5"/>
+            <rect x="5" y="5" width="3" height="3" fill="#00FF87"/>
+            <rect x="16" y="5" width="3" height="3" fill="#00FF87"/>
+            <rect x="5" y="16" width="3" height="3" fill="#00FF87"/>
+            <path d="M14 14h2v2h-2z M18 14h2v2h-2z M14 18h2v2h-2z M18 18h2v2h-2z" fill="#00FF87"/>
+          </svg>
+        </div>
+        <div class="c-body">
+          <div class="c-plat">Pago QR</div>
+          <div class="c-val">Pagar con QR</div>
+        </div>
+        <div class="c-arrow" onclick="toggleMenu(event,'menu-qr')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="5" r="1.5" fill="rgba(238,240,236,0.4)"/>
+            <circle cx="12" cy="12" r="1.5" fill="rgba(238,240,236,0.4)"/>
+            <circle cx="12" cy="19" r="1.5" fill="rgba(238,240,236,0.4)"/>
+          </svg>
+        </div>
+        <div class="c-menu" id="menu-qr">
+          <div class="c-menu-tip">Opciones</div>
+          <button class="c-menu-item" onclick="openQR();closeMenus()">
+            <div class="c-menu-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="#00FF87" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="#00FF87" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="#00FF87" stroke-width="1.8"/><rect x="5" y="5" width="3" height="3" fill="#00FF87"/><rect x="16" y="5" width="3" height="3" fill="#00FF87"/><rect x="5" y="16" width="3" height="3" fill="#00FF87"/></svg></div>
+            Ver QR
+          </button>
+          <button class="c-menu-item" onclick="downloadQR(event)">
+            <div class="c-menu-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="rgba(238,240,236,0.5)" stroke-width="1.8" stroke-linecap="round"/><polyline points="7 10 12 15 17 10" stroke="rgba(238,240,236,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Descargar QR
+          </button>
+          <div class="c-menu-sep"></div>
+          <button class="c-menu-item" onclick="shareQR(event)">
+            <div class="c-menu-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5" r="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><circle cx="6" cy="12" r="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><circle cx="18" cy="19" r="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/></svg></div>
+            Compartir
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -912,6 +1040,29 @@ body{
   </div>
 
 </div>
+<!-- QR MODAL -->
+<div class="qr-overlay" id="qr-overlay" onclick="closeQR(event)">
+  <div class="qr-box" id="qr-box">
+    <button class="qr-close" onclick="closeQRBtn()">&times;</button>
+    <div class="qr-label">Pago QR · TUM Oficinas</div>
+    <div class="qr-title">Escanea para pagar</div>
+    <div class="qr-img-wrap">
+      <img src="https://i.ibb.co/DfP6MJRD/QR-TUM-2.png" alt="QR de pago TUM Oficinas" id="qr-image"/>
+    </div>
+    <div class="qr-hint">Abre tu app bancaria y apunta<br>la cámara al código QR</div>
+    <div class="qr-actions">
+      <button class="qr-btn" onclick="downloadQRDirect()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Descargar
+      </button>
+      <button class="qr-btn" onclick="shareQRDirect()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="1.8"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="1.8"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="1.8"/></svg>
+        Compartir
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -992,7 +1143,6 @@ function closeMenus(){
   document.querySelectorAll('.c-arrow').forEach(b => b.classList.remove('open'));
 }
 
-// Toast notification
 let toastTimer;
 function showToast(msg){
   const t = document.getElementById('toast');
@@ -1000,6 +1150,45 @@ function showToast(msg){
   t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(()=> t.classList.remove('show'), 2200);
+}
+
+const QR_URL = 'https://i.ibb.co/DfP6MJRD/QR-TUM-2.png';
+
+function openQR(){
+  document.getElementById('qr-overlay').classList.add('visible');
+  document.body.style.overflow='hidden';
+}
+function closeQRBtn(){
+  document.getElementById('qr-overlay').classList.remove('visible');
+  document.body.style.overflow='';
+}
+function closeQR(e){
+  if(e.target===document.getElementById('qr-overlay')) closeQRBtn();
+}
+function downloadQR(e){
+  e.stopPropagation();
+  closeMenus();
+  downloadQRDirect();
+}
+function downloadQRDirect(){
+  const a = document.createElement('a');
+  a.href = QR_URL;
+  a.download = 'QR-TUM-Oficinas.png';
+  a.target = '_blank';
+  a.click();
+  showToast('✓  Descargando QR…');
+}
+function shareQR(e){
+  e.stopPropagation();
+  closeMenus();
+  shareQRDirect();
+}
+function shareQRDirect(){
+  if(navigator.share){
+    navigator.share({ title:'QR de pago TUM Oficinas', url: QR_URL });
+  } else {
+    navigator.clipboard.writeText(QR_URL).then(()=>showToast('✓  Enlace del QR copiado'));
+  }
 }
 </script>
 </body>
