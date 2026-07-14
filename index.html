@@ -415,6 +415,9 @@ body{
   letter-spacing:0.25em;text-transform:uppercase;font-weight:500;
 }
 
+/* ════ RESEÑAS ════ */
+.review-stars{display:flex;align-items:center;gap:2px;margin-top:2px}
+
 /* toast */
 .toast{
   position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(8px);
@@ -864,6 +867,59 @@ body{
           </button>
           <div class="c-menu-sep"></div>
           <button class="c-menu-item" onclick="shareQR(event)">
+            <div class="c-menu-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5" r="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><circle cx="6" cy="12" r="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><circle cx="18" cy="19" r="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/></svg></div>
+            Compartir
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESEÑAS GOOGLE -->
+  <div class="sect" style="padding-top:16px;">
+    <div class="sect-head">
+      <span class="sect-label">Opiniones</span>
+      <div class="sect-line"></div>
+    </div>
+    <div class="contacts">
+
+      <div class="c-row" onclick="openLink('https://g.page/r/CfsayaFqAZPOEBM/review')">
+        <div class="c-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2.5l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7-5.4-4.7 7.1-.6z" stroke="#00FF87" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="c-body">
+          <div class="c-plat">Reseñas</div>
+          <div class="c-val">Comparte tu experiencia</div>
+          <div class="review-stars">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#00FF87"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6z"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#00FF87"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6z"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#00FF87"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6z"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#00FF87"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6z"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#00FF87"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6z"/></svg>
+          </div>
+        </div>
+        <div class="c-arrow" onclick="toggleMenu(event,'menu-review')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="5" r="1.5" fill="rgba(238,240,236,0.4)"/>
+            <circle cx="12" cy="12" r="1.5" fill="rgba(238,240,236,0.4)"/>
+            <circle cx="12" cy="19" r="1.5" fill="rgba(238,240,236,0.4)"/>
+          </svg>
+        </div>
+        <div class="c-menu" id="menu-review">
+          <div class="c-menu-tip">Opciones</div>
+          <a class="c-menu-item" href="https://g.page/r/CfsayaFqAZPOEBM/review" target="_blank">
+            <div class="c-menu-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#00FF87" stroke-width="1.8" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#00FF87" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#00FF87" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Calificar en Google
+          </a>
+          <button class="c-menu-item" onclick="copyLink(event,'https://g.page/r/CfsayaFqAZPOEBM/review')">
+            <div class="c-menu-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/></svg></div>
+            Copiar enlace
+          </button>
+          <div class="c-menu-sep"></div>
+          <button class="c-menu-item" onclick="shareItem(event,'Califica a TUM Oficinas en Google','https://g.page/r/CfsayaFqAZPOEBM/review')">
             <div class="c-menu-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5" r="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><circle cx="6" cy="12" r="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><circle cx="18" cy="19" r="3" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="rgba(238,240,236,0.5)" stroke-width="1.8"/></svg></div>
             Compartir
           </button>
